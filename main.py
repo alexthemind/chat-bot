@@ -9,7 +9,7 @@ from langchain.memory import ConversationBufferMemory
 app = FastAPI()
 session_state = {}
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 
 llm = OpenAI(
         temperature=0,
