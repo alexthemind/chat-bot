@@ -5,11 +5,13 @@ from langchain import OpenAI, ConversationChain
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
+import os
 
 app = FastAPI()
 session_state = {}
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+print(OPENAI_API_KEY,'<-----')
 
 llm = OpenAI(
         temperature=0,
