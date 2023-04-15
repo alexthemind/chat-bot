@@ -6,12 +6,13 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
 import os
+from dotenv import load_dotenv
 
 app = FastAPI()
 session_state = {}
+load_dotenv()
 
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
-print(OPENAI_API_KEY,'<-----')
 
 llm = OpenAI(
         temperature=0,
@@ -41,8 +42,9 @@ async def chatBot(request: Request) -> Response:
         session_state[items.session_id] = ConversationBufferMemory()
 
     Conversation.memory = session_state[items.session_id]
+    output = Conversation.run(input=items.message)
 
-    return Conversation.run(input=items.message)
+    return {'msg': output}
 
 
 
